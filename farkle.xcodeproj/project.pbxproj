@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		D89A1FF623A564E400CD95AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A1FF523A564E400CD95AE /* AppDelegate.swift */; };
 		D89A1FF823A564E400CD95AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A1FF723A564E400CD95AE /* SceneDelegate.swift */; };
-		D89A1FFA23A564E400CD95AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A1FF923A564E400CD95AE /* ContentView.swift */; };
 		D89A1FFC23A564E500CD95AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89A1FFB23A564E500CD95AE /* Assets.xcassets */; };
 		D89A1FFF23A564E500CD95AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89A1FFE23A564E500CD95AE /* Preview Assets.xcassets */; };
 		D89A200223A564E500CD95AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89A200023A564E500CD95AE /* LaunchScreen.storyboard */; };
 		D89A200D23A564E600CD95AE /* farkleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A200C23A564E600CD95AE /* farkleTests.swift */; };
+		D89A201923A565DE00CD95AE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A201823A565DE00CD95AE /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +30,6 @@
 		D89A1FF223A564E400CD95AE /* farkle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = farkle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89A1FF523A564E400CD95AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89A1FF723A564E400CD95AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D89A1FF923A564E400CD95AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D89A1FFB23A564E500CD95AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D89A1FFE23A564E500CD95AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D89A200123A564E500CD95AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		D89A200823A564E600CD95AE /* farkleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = farkleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89A200C23A564E600CD95AE /* farkleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = farkleTests.swift; sourceTree = "<group>"; };
 		D89A200E23A564E600CD95AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D89A201823A565DE00CD95AE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +79,9 @@
 		D89A1FF423A564E400CD95AE /* farkle */ = {
 			isa = PBXGroup;
 			children = (
-				D89A1FF523A564E400CD95AE /* AppDelegate.swift */,
-				D89A1FF723A564E400CD95AE /* SceneDelegate.swift */,
-				D89A1FF923A564E400CD95AE /* ContentView.swift */,
-				D89A1FFB23A564E500CD95AE /* Assets.xcassets */,
-				D89A200023A564E500CD95AE /* LaunchScreen.storyboard */,
-				D89A200323A564E500CD95AE /* Info.plist */,
+				D89A201823A565DE00CD95AE /* MainView.swift */,
+				D89A201A23A565F800CD95AE /* App+SceneDelegates */,
+				D89A201723A565B100CD95AE /* Resources */,
 				D89A1FFD23A564E500CD95AE /* Preview Content */,
 			);
 			path = farkle;
@@ -105,6 +102,25 @@
 				D89A200E23A564E600CD95AE /* Info.plist */,
 			);
 			path = farkleTests;
+			sourceTree = "<group>";
+		};
+		D89A201723A565B100CD95AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D89A1FFB23A564E500CD95AE /* Assets.xcassets */,
+				D89A200023A564E500CD95AE /* LaunchScreen.storyboard */,
+				D89A200323A564E500CD95AE /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D89A201A23A565F800CD95AE /* App+SceneDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				D89A1FF523A564E400CD95AE /* AppDelegate.swift */,
+				D89A1FF723A564E400CD95AE /* SceneDelegate.swift */,
+			);
+			path = "App+SceneDelegates";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,8 +225,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89A1FF623A564E400CD95AE /* AppDelegate.swift in Sources */,
+				D89A201923A565DE00CD95AE /* MainView.swift in Sources */,
 				D89A1FF823A564E400CD95AE /* SceneDelegate.swift in Sources */,
-				D89A1FFA23A564E400CD95AE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
