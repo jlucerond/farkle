@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D847D88723A56CAB0064AFCA /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88623A56CAB0064AFCA /* Color+Extension.swift */; };
+		D847D88923A56E0B0064AFCA /* DiceRollingAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88823A56E0B0064AFCA /* DiceRollingAreaView.swift */; };
+		D847D88B23A56E6D0064AFCA /* OpponentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88A23A56E6D0064AFCA /* OpponentsView.swift */; };
+		D847D88D23A56F4A0064AFCA /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88C23A56F4A0064AFCA /* Opponent.swift */; };
+		D847D89423A571B30064AFCA /* OpponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D89323A571B30064AFCA /* OpponentView.swift */; };
 		D89A1FF623A564E400CD95AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A1FF523A564E400CD95AE /* AppDelegate.swift */; };
 		D89A1FF823A564E400CD95AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A1FF723A564E400CD95AE /* SceneDelegate.swift */; };
 		D89A1FFC23A564E500CD95AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89A1FFB23A564E500CD95AE /* Assets.xcassets */; };
@@ -27,6 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D847D88623A56CAB0064AFCA /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		D847D88823A56E0B0064AFCA /* DiceRollingAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollingAreaView.swift; sourceTree = "<group>"; };
+		D847D88A23A56E6D0064AFCA /* OpponentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentsView.swift; sourceTree = "<group>"; };
+		D847D88C23A56F4A0064AFCA /* Opponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
+		D847D89323A571B30064AFCA /* OpponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentView.swift; sourceTree = "<group>"; };
 		D89A1FF223A564E400CD95AE /* farkle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = farkle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89A1FF523A564E400CD95AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89A1FF723A564E400CD95AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +68,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D847D88E23A56F8B0064AFCA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D847D88C23A56F4A0064AFCA /* Opponent.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D847D88F23A56F940064AFCA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D89A201823A565DE00CD95AE /* MainView.swift */,
+				D847D89323A571B30064AFCA /* OpponentView.swift */,
+				D847D88A23A56E6D0064AFCA /* OpponentsView.swift */,
+				D847D88823A56E0B0064AFCA /* DiceRollingAreaView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D847D89023A56F9A0064AFCA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D847D88623A56CAB0064AFCA /* Color+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D89A1FE923A564E400CD95AE = {
 			isa = PBXGroup;
 			children = (
@@ -79,7 +116,9 @@
 		D89A1FF423A564E400CD95AE /* farkle */ = {
 			isa = PBXGroup;
 			children = (
-				D89A201823A565DE00CD95AE /* MainView.swift */,
+				D847D88E23A56F8B0064AFCA /* Models */,
+				D847D88F23A56F940064AFCA /* Views */,
+				D847D89023A56F9A0064AFCA /* Extensions */,
 				D89A201A23A565F800CD95AE /* App+SceneDelegates */,
 				D89A201723A565B100CD95AE /* Resources */,
 				D89A1FFD23A564E500CD95AE /* Preview Content */,
@@ -226,7 +265,12 @@
 			files = (
 				D89A1FF623A564E400CD95AE /* AppDelegate.swift in Sources */,
 				D89A201923A565DE00CD95AE /* MainView.swift in Sources */,
+				D847D88D23A56F4A0064AFCA /* Opponent.swift in Sources */,
+				D847D89423A571B30064AFCA /* OpponentView.swift in Sources */,
 				D89A1FF823A564E400CD95AE /* SceneDelegate.swift in Sources */,
+				D847D88B23A56E6D0064AFCA /* OpponentsView.swift in Sources */,
+				D847D88723A56CAB0064AFCA /* Color+Extension.swift in Sources */,
+				D847D88923A56E0B0064AFCA /* DiceRollingAreaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
