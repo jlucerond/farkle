@@ -12,8 +12,14 @@ struct OpponentsView: View {
     @State var opponents: [Opponent]
 
     var body: some View {
-        ForEach(opponents) { opponent in
-            Circle()
+        HStack {
+            VStack {
+                ForEach(opponents) { opponent in
+                    OpponentView(opponent: opponent, isCurrentlyRolling: false, isOpponentOnLeft: true)
+                    Spacer()
+                }
+            }
+            Spacer()
         }
     }
 }

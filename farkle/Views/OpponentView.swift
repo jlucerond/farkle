@@ -16,11 +16,9 @@ struct OpponentView: View {
 
     var body: some View {
         ZStack {
-            Ellipse()
+            HalfCircle(visibleHalf: isOpponentOnLeft ? .right : .left)
                 .foregroundColor(isCurrentlyRolling ? .green : .red)
                 .opacity(0.2)
-                .transformEffect(.init(translationX: width/2 * (isOpponentOnLeft ? -1 : 1), y: 0))
-                .clipped()
             VStack {
                 Text(opponent.name)
                     .font(.headline)
