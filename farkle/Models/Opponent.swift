@@ -13,15 +13,6 @@ struct Opponent: Identifiable {
 
     let name: String
     var score: Int
+    var isCurrentlyRolling: Bool = false
     let riskStrategy: Int // TODO: - turn this into a whole other struct at some point
-}
-
-class OpponentManager {
-    static var opponents: [Opponent] = {
-        let dad = Opponent(name: "Dad", score: 0, riskStrategy: 1)
-        let joe = Opponent(name: "Joe", score: 100, riskStrategy: 2)
-        let dominic = Opponent(name: "Dominic", score: 7000, riskStrategy: 3)
-        let sam = Opponent(name: "Samantha", score: 99999, riskStrategy: 4)
-        return [dad, joe, dominic, sam]
-    }()
 }

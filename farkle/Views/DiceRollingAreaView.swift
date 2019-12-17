@@ -9,14 +9,24 @@
 import SwiftUI
 
 struct DiceRollingAreaView: View {
+    var dice: [Dice]
     var body: some View {
-        Rectangle()
-            .foregroundColor(.brown)
+        ZStack {
+            Rectangle()
+                .foregroundColor(.brown)
+            VStack {
+                Spacer()
+                ForEach(dice) { singleDice in
+                    DiceView(dice: singleDice)
+                    Spacer()
+                }
+            }
+        }
     }
 }
 
 struct DiceRollingAreaView_Previews: PreviewProvider {
     static var previews: some View {
-        DiceRollingAreaView()
+        DiceRollingAreaView(dice: DiceManager().dice)
     }
 }

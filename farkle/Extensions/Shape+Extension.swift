@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HalfCircle: View {
     enum VisibleHalf {
-        case left, right
+        case left, right, top
     }
     var visibleHalf: VisibleHalf
 //    .frame(width: 0.6 * geo.frame(in: .local).width,
@@ -18,7 +18,9 @@ struct HalfCircle: View {
     var body: some View {
         GeometryReader { geo in
             Circle()
-                .offset(x: (geo.frame(in: .local).width / 2)  * (self.visibleHalf == .left ? 1 : -1), y: 0)
+                .offset(x: (self.visibleHalf == .left ? 1 : 0) * (geo.frame(in: .local).width / 2), y: 0)
+                .offset(x: (self.visibleHalf == .right ? -1 : 0) * (geo.frame(in: .local).width / 2), y: 0)
+                .offset(x: 0, y: (self.visibleHalf == .top ? 1 : 0) * (geo.frame(in: .local).height / 2))
                 .clipped()
         }
     }
@@ -27,6 +29,6 @@ struct HalfCircle: View {
 struct HalfCirlce_Previews: PreviewProvider {
     static var previews: some View {
         HalfCircle(visibleHalf: .right)
-        .frame(width: 100, height: 100, alignment: .leading)
+        .frame(width: 300, height: 200, alignment: .leading)
     }
 }

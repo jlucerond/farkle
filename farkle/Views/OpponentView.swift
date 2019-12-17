@@ -10,14 +10,13 @@ import SwiftUI
 
 struct OpponentView: View {
     @State var opponent: Opponent
-    @State var isCurrentlyRolling: Bool
     let isOpponentOnLeft: Bool
     let width: CGFloat = 100
 
     var body: some View {
         ZStack {
             HalfCircle(visibleHalf: isOpponentOnLeft ? .right : .left)
-                .foregroundColor(isCurrentlyRolling ? .green : .red)
+                .foregroundColor(self.opponent.isCurrentlyRolling ? .green : .red)
                 .opacity(0.2)
             VStack {
                 Text(opponent.name)
@@ -32,6 +31,6 @@ struct OpponentView: View {
 
 struct OpponentView_Previews: PreviewProvider {
     static var previews: some View {
-        OpponentView(opponent: OpponentManager.opponents.last!, isCurrentlyRolling: true, isOpponentOnLeft: true)
+        OpponentView(opponent: GameManager.opponents.last!, isOpponentOnLeft: true)
     }
 }
