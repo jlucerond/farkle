@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D847D88723A56CAB0064AFCA /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88623A56CAB0064AFCA /* Color+Extension.swift */; };
 		D847D88923A56E0B0064AFCA /* DiceRollingAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88823A56E0B0064AFCA /* DiceRollingAreaView.swift */; };
-		D847D88B23A56E6D0064AFCA /* AllPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88A23A56E6D0064AFCA /* AllPlayersView.swift */; };
+		D847D88B23A56E6D0064AFCA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88A23A56E6D0064AFCA /* MainView.swift */; };
 		D847D88D23A56F4A0064AFCA /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D88C23A56F4A0064AFCA /* Opponent.swift */; };
 		D847D89423A571B30064AFCA /* OpponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D89323A571B30064AFCA /* OpponentView.swift */; };
 		D847D89623A6A5D20064AFCA /* Shape+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847D89523A6A5D20064AFCA /* Shape+Extension.swift */; };
@@ -19,7 +19,6 @@
 		D89A1FFF23A564E500CD95AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89A1FFE23A564E500CD95AE /* Preview Assets.xcassets */; };
 		D89A200223A564E500CD95AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89A200023A564E500CD95AE /* LaunchScreen.storyboard */; };
 		D89A200D23A564E600CD95AE /* farkleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A200C23A564E600CD95AE /* farkleTests.swift */; };
-		D89A201923A565DE00CD95AE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A201823A565DE00CD95AE /* MainView.swift */; };
 		D8F0165E23A6C0560015238F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0165D23A6C0560015238F /* Player.swift */; };
 		D8F0166023A6C07D0015238F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0165F23A6C07D0015238F /* PlayerView.swift */; };
 		D8F0166223A6EB590015238F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0166123A6EB590015238F /* GameManager.swift */; };
@@ -41,7 +40,7 @@
 /* Begin PBXFileReference section */
 		D847D88623A56CAB0064AFCA /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		D847D88823A56E0B0064AFCA /* DiceRollingAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollingAreaView.swift; sourceTree = "<group>"; };
-		D847D88A23A56E6D0064AFCA /* AllPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPlayersView.swift; sourceTree = "<group>"; };
+		D847D88A23A56E6D0064AFCA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D847D88C23A56F4A0064AFCA /* Opponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 		D847D89323A571B30064AFCA /* OpponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentView.swift; sourceTree = "<group>"; };
 		D847D89523A6A5D20064AFCA /* Shape+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+Extension.swift"; sourceTree = "<group>"; };
@@ -55,7 +54,6 @@
 		D89A200823A564E600CD95AE /* farkleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = farkleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89A200C23A564E600CD95AE /* farkleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = farkleTests.swift; sourceTree = "<group>"; };
 		D89A200E23A564E600CD95AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D89A201823A565DE00CD95AE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D8F0165D23A6C0560015238F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D8F0165F23A6C07D0015238F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		D8F0166123A6EB590015238F /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -97,8 +95,7 @@
 		D847D88F23A56F940064AFCA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D89A201823A565DE00CD95AE /* MainView.swift */,
-				D847D88A23A56E6D0064AFCA /* AllPlayersView.swift */,
+				D847D88A23A56E6D0064AFCA /* MainView.swift */,
 				D847D89323A571B30064AFCA /* OpponentView.swift */,
 				D8F0165F23A6C07D0015238F /* PlayerView.swift */,
 				D847D88823A56E0B0064AFCA /* DiceRollingAreaView.swift */,
@@ -287,7 +284,6 @@
 				D89A1FF623A564E400CD95AE /* AppDelegate.swift in Sources */,
 				D8F0166223A6EB590015238F /* GameManager.swift in Sources */,
 				D847D89623A6A5D20064AFCA /* Shape+Extension.swift in Sources */,
-				D89A201923A565DE00CD95AE /* MainView.swift in Sources */,
 				D8F0166023A6C07D0015238F /* PlayerView.swift in Sources */,
 				D847D88D23A56F4A0064AFCA /* Opponent.swift in Sources */,
 				D847D89423A571B30064AFCA /* OpponentView.swift in Sources */,
@@ -295,7 +291,7 @@
 				D8F0166823A6F3960015238F /* DiceManager.swift in Sources */,
 				D8F0166623A6EEDA0015238F /* Dice.swift in Sources */,
 				D8F0166423A6EDE60015238F /* DiceView.swift in Sources */,
-				D847D88B23A56E6D0064AFCA /* AllPlayersView.swift in Sources */,
+				D847D88B23A56E6D0064AFCA /* MainView.swift in Sources */,
 				D847D88723A56CAB0064AFCA /* Color+Extension.swift in Sources */,
 				D8F0165E23A6C0560015238F /* Player.swift in Sources */,
 				D847D88923A56E0B0064AFCA /* DiceRollingAreaView.swift in Sources */,
