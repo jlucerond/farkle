@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct DiceRollingAreaView: View {
-    var dice: [Dice]
+    @Binding var dice: [Dice]
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.brown)
             VStack {
                 Spacer()
+                // TODO: - Why doesn't this work here with Bindings?
                 ForEach(dice) { singleDice in
                     DiceView(dice: singleDice)
                     Spacer()

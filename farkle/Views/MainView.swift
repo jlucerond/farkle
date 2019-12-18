@@ -9,30 +9,33 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var game: GameManager = GameManager()
+
     var body: some View {
         VStack {
             Spacer()
             HStack {
                 VStack {
                     Spacer()
-                    ForEach(GameManager.leftOpponents) { opponent in
+                    ForEach(game.leftOpponents) { opponent in
                         OpponentView(opponent: opponent, isOpponentOnLeft: true)
                         Spacer()
                         Spacer()
                     }
                 }
 
-                DiceRollingAreaView(dice: DiceManager().dice)
+                DiceRollingAreaView(dice: $game.diceManager.dice)
                 VStack {
                     Spacer()
-                    ForEach(GameManager.rightOpponents) { opponent in
+                    ForEach(game.rightOpponents) { opponent in
                         OpponentView(opponent: opponent, isOpponentOnLeft: false)
                         Spacer()
                         Spacer()
                     }
                 }
             }
-            PlayerView(player: GameManager.player)
+            DecisionView(diceManager: $game.diceManager)
+            PlayerView(player: game.player)
         }
     }
 }

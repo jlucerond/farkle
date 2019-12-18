@@ -9,7 +9,12 @@
 import Foundation
 
 class GameManager {
-    static var opponents: [Opponent] = {
+    var diceManager: DiceManager = DiceManager()
+    var dice: [Dice] {
+        diceManager.dice
+    }
+
+    var opponents: [Opponent] = {
         let dad = Opponent(name: "Dad", score: 0, riskStrategy: 1)
         let joe = Opponent(name: "Joe", score: 500, isCurrentlyRolling: true, riskStrategy: 2)
         let dominic = Opponent(name: "Dominic", score: 7000, riskStrategy: 3)
@@ -17,9 +22,9 @@ class GameManager {
         return [dad, joe, dominic, sam]
     }()
 
-    static var leftOpponents: [Opponent] {
+    var leftOpponents: [Opponent] {
         var leftOpponents = [Opponent]()
-        for (index, opponent) in GameManager.opponents.enumerated() {
+        for (index, opponent) in opponents.enumerated() {
             if index % 2 == 0 {
                 leftOpponents.append(opponent)
             }
@@ -27,9 +32,9 @@ class GameManager {
         return leftOpponents
     }
 
-    static var rightOpponents: [Opponent] {
+    var rightOpponents: [Opponent] {
         var rightOpponents = [Opponent]()
-        for (index, opponent) in GameManager.opponents.enumerated() {
+        for (index, opponent) in opponents.enumerated() {
             if index % 2 == 1 {
                 rightOpponents.append(opponent)
             }
@@ -37,5 +42,5 @@ class GameManager {
         return rightOpponents
     }
 
-    static var player: Player = Player(score: 0, isCurrentlyRolling: false)
+    var player: Player = Player(score: 0, isCurrentlyRolling: false)
 }

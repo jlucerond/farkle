@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DiceView: View {
-    @State var dice: Dice
+    @Binding var dice: Dice
 
     var body: some View {
         ZStack {
@@ -34,12 +34,12 @@ struct DiceView: View {
     }
 }
 
-struct DiceView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-        DiceView(dice: Dice(value: 1, isSelected: false))
-        DiceView(dice: Dice(value: 3, isSelected: true))
-        DiceView(dice: Dice(value: 2, isSelected: false))
-        }
-    }
-}
+//struct DiceView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack {
+//        DiceView(dice: Dice(value: 1, isSelected: false))
+//        DiceView(dice: Dice(value: 3, isSelected: true))
+//        DiceView(dice: Dice(value: 2, isSelected: false))
+//        }
+//    }
+//}

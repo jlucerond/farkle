@@ -28,7 +28,7 @@ class DiceManager {
     func rollUnselectedDice() {
         for (index, oneDice) in dice.enumerated() {
             if !oneDice.isSelected {
-                dice[index - 1] = getRandomDice()
+                dice[index] = getRandomDice()
             }
         }
     }

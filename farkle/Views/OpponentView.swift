@@ -31,6 +31,7 @@ struct OpponentView: View {
 
 struct OpponentView_Previews: PreviewProvider {
     static var previews: some View {
-        OpponentView(opponent: GameManager.opponents.last!, isOpponentOnLeft: true)
+        let opponent = Opponent(id: UUID(), name: "Joe", score: 1500, isCurrentlyRolling: true, riskStrategy: 2)
+        return OpponentView(opponent: opponent, isOpponentOnLeft: true)
     }
 }
