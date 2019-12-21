@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PlayerView: View {
-    @State var player: Player
+    @State var player: HumanPlayer
     let width: CGFloat = 200
 
     var body: some View {
@@ -31,6 +31,6 @@ struct PlayerView: View {
 
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(player: Player(score: 1950, isCurrentlyRolling: false))
+        PlayerView(player: HumanPlayer(score: 1950, isCurrentlyRolling: false))
     }
 }

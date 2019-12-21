@@ -17,7 +17,7 @@ struct MainView: View {
             HStack {
                 VStack {
                     Spacer()
-                    ForEach(game.leftOpponents) { opponent in
+                    ForEach(game.playerManager.leftOpponents) { opponent in
                         OpponentView(opponent: opponent, isOpponentOnLeft: true)
                         Spacer()
                         Spacer()
@@ -27,7 +27,7 @@ struct MainView: View {
                 DiceRollingAreaView(dice: $game.diceManager.dice)
                 VStack {
                     Spacer()
-                    ForEach(game.rightOpponents) { opponent in
+                    ForEach(game.playerManager.rightOpponents) { opponent in
                         OpponentView(opponent: opponent, isOpponentOnLeft: false)
                         Spacer()
                         Spacer()
@@ -36,7 +36,7 @@ struct MainView: View {
             }
             DecisionView(diceManager: $game.diceManager)
                 .offset(y: 50)
-            PlayerView(player: game.player)
+            PlayerView(player: game.playerManager.humanPlayer)
         }
     }
 }

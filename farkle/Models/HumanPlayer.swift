@@ -1,5 +1,5 @@
 //
-//  Player.swift
+//  HumanPlayer.swift
 //  farkle
 //
 //  Created by Joe Lucero on 12/15/19.
@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Player {
+protocol Player {
+    var isCurrentlyRolling: Bool { get set }
+}
+
+struct HumanPlayer: Player {
     var score: Int
     var isCurrentlyRolling: Bool = false
 }
