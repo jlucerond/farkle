@@ -15,7 +15,7 @@ struct DecisionView: View {
             Button(action: {
                 self.diceManager.rollAllDice()
             }) {
-                Text("Roll\nDice")
+                Text("Start Turn")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -26,7 +26,7 @@ struct DecisionView: View {
             Button(action: {
                 self.diceManager.rollUnselectedDice()
             }) {
-                Text("End\nTurn")
+                Text("Roll Reaming Dice")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -38,8 +38,9 @@ struct DecisionView: View {
     }
 }
 
-//struct DecisionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DecisionView(diceManager: DiceManager())
-//    }
-//}
+struct DecisionView_Previews: PreviewProvider {
+    @State static var diceManager: DiceManager = DiceManager()
+    static var previews: some View {
+        DecisionView(diceManager: DecisionView_Previews.$diceManager)
+    }
+}

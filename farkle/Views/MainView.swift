@@ -35,6 +35,7 @@ struct MainView: View {
                 }
             }
             DecisionView(diceManager: $game.diceManager)
+                .offset(y: 50)
             PlayerView(player: game.player)
         }
     }

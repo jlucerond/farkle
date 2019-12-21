@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DiceManager {
+struct DiceManager {
     var dice: [Dice]
 
     init() {
@@ -18,14 +18,14 @@ class DiceManager {
         }
     }
 
-    func rollAllDice() {
+    mutating func rollAllDice() {
         dice = []
         for _ in 1...6 {
             dice.append(getRandomDice())
         }
     }
 
-    func rollUnselectedDice() {
+    mutating func rollUnselectedDice() {
         for (index, oneDice) in dice.enumerated() {
             if !oneDice.isSelected {
                 dice[index] = getRandomDice()

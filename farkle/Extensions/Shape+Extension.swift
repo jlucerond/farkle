@@ -13,7 +13,6 @@ struct HalfCircle: View {
         case left, right, top
     }
     var visibleHalf: VisibleHalf
-//    .frame(width: 0.6 * geo.frame(in: .local).width,
 
     var body: some View {
         GeometryReader { geo in

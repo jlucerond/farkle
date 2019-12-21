@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameManager {
+struct GameManager {
     var diceManager: DiceManager = DiceManager()
     var dice: [Dice] {
         diceManager.dice

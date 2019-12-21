@@ -10,15 +10,15 @@ import SwiftUI
 
 struct DiceRollingAreaView: View {
     @Binding var dice: [Dice]
+
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.brown)
             VStack {
                 Spacer()
-                // TODO: - Why doesn't this work here with Bindings?
-                ForEach(dice) { singleDice in
-                    DiceView(dice: singleDice)
+                ForEach(dice.indices) { index in
+                    DiceView(dice: self._dice[index])
                     Spacer()
                 }
             }
@@ -27,7 +27,8 @@ struct DiceRollingAreaView: View {
 }
 
 struct DiceRollingAreaView_Previews: PreviewProvider {
+    @State static var diceExample = DiceManager().dice
     static var previews: some View {
-        DiceRollingAreaView(dice: DiceManager().dice)
+        DiceRollingAreaView(dice: DiceRollingAreaView_Previews.$diceExample)
     }
 }
