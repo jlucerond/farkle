@@ -8,16 +8,22 @@
 
 import Foundation
 
-struct Opponent: Player, Identifiable {
-    var id = UUID()
-
+class Opponent: Player, Identifiable {
+    var id: UUID = UUID()
     let name: String
     var score: Int
-    var isCurrentlyRolling: Bool = false
+    var isCurrentlyRolling: Bool
     let riskStrategy: RiskStrategy = RiskStrategyManager.random()
 
+    init(name: String, score: Int = 0, isCurrentlyRolling: Bool = false) {
+        self.name = name
+        self.score = score
+        self.isCurrentlyRolling = isCurrentlyRolling
+    }
+
     typealias Decision = (scoresToKeep: [Score], willRollAgain: Bool)
-    mutating func takeTurn(pointsThisRound: Int, scoresThisRoll: [Score], remainingDiceOnTable: Int) -> Decision {
+    func takeTurn(pointsThisRound: Int, scoresThisRoll: [Score], remainingDiceOnTable: Int) -> Decision {
+
         guard !scoresThisRoll.isEmpty else { return ([], false) }
 
         let totalPointsIfStoppingNow = pointsThisRound + scoresThisRoll.reduce(0) { $0 + $1.points }
@@ -30,7 +36,7 @@ struct Opponent: Player, Identifiable {
         }
     }
 
-    mutating func endTurn(scoreThisRound: Int) {
+    func endTurn(scoreThisRound: Int) {
         score += scoreThisRound
         isCurrentlyRolling = false
     }
@@ -75,5 +81,11 @@ private extension Opponent {
         case (false, false):
             return riskStrategy.willUserRollAgainOnCloseCall()
         }
+    }
+}
+
+extension Opponent: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "Name: \(name)."
     }
 }

@@ -17,3 +17,9 @@ struct Dice: Identifiable {
         return Image("\(value)")
     }
 }
+
+extension Dice: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "Dice: \(value)"
+    }
+}

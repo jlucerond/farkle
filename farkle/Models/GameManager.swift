@@ -66,12 +66,14 @@ struct GameManager {
         let scoreThisRound = scoresPoints ? pointsThisRound : 0
         opponent.endTurn(scoreThisRound: scoreThisRound)
         pointsThisRound = 0
+        playerManager.endPlayersTurn()
     }
 
     mutating func endTurnForPlayer(scoresPoints: Bool) {
         playerManager.humanPlayer.score += scoresPoints ? pointsThisRound : 0
         playerManager.humanPlayer.isCurrentlyRolling = false
         pointsThisRound = 0
+        playerManager.endPlayersTurn()
     }
 
 }

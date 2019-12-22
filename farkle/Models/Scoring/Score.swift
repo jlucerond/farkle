@@ -62,3 +62,9 @@ enum ScoringCombination {
     case five
     case one
 }
+
+extension Score: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "Score of kind:\(kind). Score: \(points)"
+    }
+}

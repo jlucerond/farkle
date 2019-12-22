@@ -40,7 +40,6 @@ struct DiceManager {
 
     private func getRandomDice() -> Dice {
         let randomNumber = Int.random(in: 1...6)
-        print(randomNumber)
         return Dice(value: randomNumber)
     }
 }

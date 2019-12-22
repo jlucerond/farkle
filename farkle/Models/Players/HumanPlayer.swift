@@ -10,6 +10,7 @@ import Foundation
 
 protocol Player {
     var isCurrentlyRolling: Bool { get set }
+    var score: Int { get set }
 }
 
 struct HumanPlayer: Player {

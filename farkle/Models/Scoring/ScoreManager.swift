@@ -26,30 +26,33 @@ struct ScoreManager {
             } else if hasFourOfAKindPlusPair(diceDictionary: diceDictionary) {
                 scores.append(Score(kind: .fourOfAKindPlusPair))
             }
-        } else {
-            // Now we need to check for all other possibilities watching for overlap
-            if hasFiveOfAKind(diceDictionary: diceDictionary) {
-                scores.append(Score(kind: .fiveOfAKind))
-            } else if hasFourOfAKindPlusPair(diceDictionary: diceDictionary) {
-                scores.append(Score(kind: .fourOfAKind))
-            } else if hasThreeOfAKind(diceDictionary: diceDictionary) {
-                if let value = diceDictionary.first(where: { $1 == 3 }) {
-                    scores.append(Score(kind: .threeOfAKind(diceValue: value.key)))
-                } else {
-                    assertionFailure("Something went wrong here")
-                }
-            }
+        }
 
-            // Then see if we have leftover (wasn't used above) fives or ones
-            let numberOfFives = remainingFives(diceDictionary: diceDictionary)
-            for _ in 0..<numberOfFives {
-                scores.append(Score(kind: .five))
-            }
+        // If we have one of these, we hit the jackpot and don't need to check anything else.
+        if !scores.isEmpty { return scores }
 
-            let numberOfOnes = remainingOnes(diceDictionary: diceDictionary)
-            for _ in 0..<numberOfOnes {
-                scores.append(Score(kind: .one))
+        // Now we need to check for all other possibilities watching for overlap
+        if hasFiveOfAKind(diceDictionary: diceDictionary) {
+            scores.append(Score(kind: .fiveOfAKind))
+        } else if hasFourOfAKindPlusPair(diceDictionary: diceDictionary) {
+            scores.append(Score(kind: .fourOfAKind))
+        } else if hasThreeOfAKind(diceDictionary: diceDictionary) {
+            if let value = diceDictionary.first(where: { $1 == 3 }) {
+                scores.append(Score(kind: .threeOfAKind(diceValue: value.key)))
+            } else {
+                assertionFailure("Something went wrong here")
             }
+        }
+
+        // Then see if we have leftover (wasn't used above) fives or ones
+        let numberOfFives = remainingFives(diceDictionary: diceDictionary)
+        for _ in 0..<numberOfFives {
+            scores.append(Score(kind: .five))
+        }
+
+        let numberOfOnes = remainingOnes(diceDictionary: diceDictionary)
+        for _ in 0..<numberOfOnes {
+            scores.append(Score(kind: .one))
         }
 
         return scores

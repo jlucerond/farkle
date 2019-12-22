@@ -68,12 +68,12 @@ struct PlayerManager {
         }
     }
 
-    mutating func getNextPlayer() -> Player {
+    mutating func endPlayersTurn() {
+        print("Player ends turn with: \(currentPlayer.score)")
         if currentIndex <= opponents.count {
             currentIndex += 1
         } else {
             currentIndex = 0
         }
-        return currentPlayer
     }
 }
