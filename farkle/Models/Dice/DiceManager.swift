@@ -10,6 +10,7 @@ import Foundation
 
 struct DiceManager {
     var dice: [Dice]
+    var unselectedDice: [Dice] { dice.filter { !$0.isSelected }}
 
     init() {
         dice = [

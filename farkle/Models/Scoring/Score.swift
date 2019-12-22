@@ -34,6 +34,20 @@ struct Score {
             return 100
         }
     }
+    var diceUsed: Int {
+        switch kind {
+        case .twoTriples, .sixStraight, .sixOfAKind, .threePairs, .fourOfAKindPlusPair:
+            return 6
+        case .fiveOfAKind:
+            return 5
+        case .fourOfAKind:
+            return 4
+        case .threeOfAKind(diceValue: _):
+            return 3
+        case .five, .one:
+            return 1
+        }
+    }
 }
 
 enum ScoringCombination {

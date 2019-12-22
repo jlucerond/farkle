@@ -9,17 +9,21 @@
 import Foundation
 
 struct PlayerManager {
-    var humanPlayer: HumanPlayer = HumanPlayer(score: 0, isCurrentlyRolling: false)
-    var currentPlayer: Player?
+    var humanPlayer: HumanPlayer
+    var opponents: [Opponent]
 
-    var opponents: [Opponent] = {
+    init() {
+        self.humanPlayer = HumanPlayer(score: 0)
         let dad = Opponent(name: "Dad", score: 0)
-        let joe = Opponent(name: "Joe", score: 500, isCurrentlyRolling: true)
-        let dominic = Opponent(name: "Dominic", score: 7000)
-        let sam = Opponent(name: "Samantha", score: 99999)
+        let joe = Opponent(name: "Joe", score: 0)
+        let dominic = Opponent(name: "Dominic", score: 0)
+        let sam = Opponent(name: "Samantha", score: 0)
 
-        return [dad, joe, dominic, sam]
-    }()
+        let opponents = [dad, joe, dominic, sam]
+        self.opponents = opponents
+        self.currentIndex = Int.random(in: 0...opponents.count)
+        rearrangePlayers()
+    }
 
     var leftOpponents: [Opponent] {
         var leftOpponents = [Opponent]()
@@ -41,7 +45,7 @@ struct PlayerManager {
         return rightOpponents
     }
 
-    mutating func rearrangePlayers() {
+    private mutating func rearrangePlayers() {
         var newArray = [Opponent]()
         for player in opponents {
             if newArray.isEmpty {
@@ -52,5 +56,24 @@ struct PlayerManager {
             }
         }
         opponents = newArray
+    }
+
+    private var currentIndex: Int
+    var currentPlayer: Player {
+        switch currentIndex {
+        case 0..<opponents.count:
+            return opponents[currentIndex]
+        default:
+            return humanPlayer
+        }
+    }
+
+    mutating func getNextPlayer() -> Player {
+        if currentIndex <= opponents.count {
+            currentIndex += 1
+        } else {
+            currentIndex = 0
+        }
+        return currentPlayer
     }
 }

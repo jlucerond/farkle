@@ -22,7 +22,7 @@ struct Opponent: Player, Identifiable {
 
         let totalPointsIfStoppingNow = pointsThisRound + scoresThisRoll.reduce(0) { $0 + $1.points }
         if shouldRollAgain(pointsThisRound: totalPointsIfStoppingNow, remainingDiceOnTable: remainingDiceOnTable) {
-            let scoresToKeep = whichScoresToKeep(scoresThisRoll: scoresThisRoll)
+            let scoresToKeep = getScoresToKeep(allScoresThisRoll: scoresThisRoll)
             return (scoresToKeep, true)
         } else {
             // If we're not rolling again, take all of the points that you can
@@ -37,20 +37,20 @@ struct Opponent: Player, Identifiable {
 }
 
 private extension Opponent {
-    func whichScoresToKeep(scoresThisRoll: [Score]) -> [Score] {
-        guard scoresThisRoll.count > 1 else { return scoresThisRoll }
+    func getScoresToKeep(allScoresThisRoll: [Score]) -> [Score] {
+        guard allScoresThisRoll.count > 1 else { return allScoresThisRoll }
         switch riskStrategy.scoresToKeep {
         case .allOnesAndFives:
-            return scoresThisRoll
+            return allScoresThisRoll
         case .allOnes:
-            var scoresToKeep: [Score] = scoresThisRoll.filter { $0.points > 50 }
-            if scoresToKeep.isEmpty, let firstFive = scoresThisRoll.first {
+            var scoresToKeep: [Score] = allScoresThisRoll.filter { $0.points > 50 }
+            if scoresToKeep.isEmpty, let firstFive = allScoresThisRoll.first {
                 scoresToKeep.append(firstFive)
             }
             return scoresToKeep
         case .singleOne:
-            var scoresToKeep: [Score] = scoresThisRoll.filter { $0.points > 100 }
-            if let singleFive = scoresThisRoll.first(where:{ $0.points == 100}) {
+            var scoresToKeep: [Score] = allScoresThisRoll.filter { $0.points > 100 }
+            if let singleFive = allScoresThisRoll.first(where:{ $0.points == 100}) {
                 scoresToKeep.append(singleFive)
             }
             return scoresToKeep
@@ -59,7 +59,8 @@ private extension Opponent {
 
     func shouldRollAgain(pointsThisRound: Int, remainingDiceOnTable: Int) -> Bool {
         // Must have 500 points before you can stop
-        guard pointsThisRound + score >= 500 else { return true }
+        #warning("put this back in eventually")
+//        guard pointsThisRound + score >= 500 else { return true }
 
         let hasEnoughPointsToStop = pointsThisRound > riskStrategy.minimumStoppingScoreForRound
         let hasEnoughDiceToRollAgain = remainingDiceOnTable > riskStrategy.maxDiceRemainingAllowed
