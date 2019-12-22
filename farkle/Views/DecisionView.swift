@@ -26,7 +26,7 @@ struct DecisionView: View {
             Button(action: {
                 self.diceManager.rollUnselectedDice()
             }) {
-                Text("Roll Reaming Dice")
+                Text("Roll Dice")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)

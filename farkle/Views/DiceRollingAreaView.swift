@@ -15,6 +15,7 @@ struct DiceRollingAreaView: View {
         ZStack {
             Rectangle()
                 .foregroundColor(.brown)
+                .cornerRadius(5)
             VStack {
                 Spacer()
                 ForEach(dice.indices) { index in

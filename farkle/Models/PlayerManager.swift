@@ -13,10 +13,10 @@ struct PlayerManager {
     var currentPlayer: Player?
 
     var opponents: [Opponent] = {
-        let dad = Opponent(name: "Dad", score: 0, riskStrategy: 1)
-        let joe = Opponent(name: "Joe", score: 500, isCurrentlyRolling: true, riskStrategy: 2)
-        let dominic = Opponent(name: "Dominic", score: 7000, riskStrategy: 3)
-        let sam = Opponent(name: "Samantha", score: 99999, riskStrategy: 4)
+        let dad = Opponent(name: "Dad", score: 0)
+        let joe = Opponent(name: "Joe", score: 500, isCurrentlyRolling: true)
+        let dominic = Opponent(name: "Dominic", score: 7000)
+        let sam = Opponent(name: "Samantha", score: 99999)
 
         return [dad, joe, dominic, sam]
     }()

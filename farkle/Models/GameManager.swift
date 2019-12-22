@@ -10,7 +10,6 @@ import Foundation
 
 struct GameManager {
     var diceManager: DiceManager = DiceManager()
-    var dice: [Dice] { diceManager.dice }
     var playerManager: PlayerManager = PlayerManager()
 
     init() {
