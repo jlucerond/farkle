@@ -30,8 +30,8 @@ struct Opponent: Player, Identifiable {
         }
     }
 
-    mutating func endTurn(roundScores: [Score]) {
-        score += roundScores.reduce(0) { $0 + $1.points }
+    mutating func endTurn(scoreThisRound: Int) {
+        score += scoreThisRound
         isCurrentlyRolling = false
     }
 }

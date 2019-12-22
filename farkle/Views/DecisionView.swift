@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct DecisionView: View {
-    @Binding var diceManager: DiceManager
+    @Binding var gameManager: GameManager
     var body: some View {
         HStack {
             Button(action: {
-                self.diceManager.rollAllDice()
+                self.gameManager.takeTurn()
             }) {
-                Text("Start Turn")
+                Text("Have computer Roll")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -24,7 +24,7 @@ struct DecisionView: View {
                     .cornerRadius(10)
             }
             Button(action: {
-                self.diceManager.rollUnselectedDice()
+                self.gameManager.diceManager.rollUnselectedDice()
             }) {
                 Text("Roll Dice")
                     .font(.title)
@@ -39,8 +39,8 @@ struct DecisionView: View {
 }
 
 struct DecisionView_Previews: PreviewProvider {
-    @State static var diceManager: DiceManager = DiceManager()
+    @State static var gameManager: GameManager = GameManager()
     static var previews: some View {
-        DecisionView(diceManager: DecisionView_Previews.$diceManager)
+        DecisionView(gameManager: DecisionView_Previews.$gameManager)
     }
 }
