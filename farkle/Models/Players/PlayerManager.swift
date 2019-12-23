@@ -6,23 +6,29 @@
 //  Copyright © 2019 Joe Lucero. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 struct PlayerManager {
-    var humanPlayer: HumanPlayer
-    var opponents: [Opponent]
+    var humanPlayer: HumanPlayer = HumanPlayer(score: 0)
+    var opponents: [Opponent] = [
+        Opponent(name: "Dad", score: 0),
+        Opponent(name: "Joe", score: 0),
+        Opponent(name: "Dominic", score: 0),
+        Opponent(name: "Samantha", score: 0)
+    ]
 
     init() {
-        self.humanPlayer = HumanPlayer(score: 0)
-        let dad = Opponent(name: "Dad", score: 0)
-        let joe = Opponent(name: "Joe", score: 0)
-        let dominic = Opponent(name: "Dominic", score: 0)
-        let sam = Opponent(name: "Samantha", score: 0)
+        randomizePlayers()
+    }
 
-        let opponents = [dad, joe, dominic, sam]
-        self.opponents = opponents
-        self.currentIndex = Int.random(in: 0...opponents.count)
-        rearrangePlayers()
+    private var currentIndex: Int = 0
+    var currentPlayer: Player {
+        switch currentIndex {
+        case 0..<opponents.count:
+            return opponents[currentIndex]
+        default:
+            return humanPlayer
+        }
     }
 
     var leftOpponents: [Opponent] {
@@ -45,7 +51,27 @@ struct PlayerManager {
         return rightOpponents
     }
 
-    private mutating func rearrangePlayers() {
+    mutating func updateGame(player: Player) {
+        if currentIndex <= opponents.count - 1 {
+            currentIndex += 1
+        } else {
+            currentIndex = 0
+        }
+        print("NewIndex is now \(currentIndex)")
+        print("NewPlayer is now \(currentPlayer)")
+
+        if let _ = player as? HumanPlayer {
+            self.humanPlayer.score = player.score
+        } else if let opponent = player as? Opponent {
+            guard var oldOpponent = opponents.first(where: { $0.id == opponent.id }) else { return }
+            oldOpponent.score = player.score
+        }
+    }
+}
+
+private extension PlayerManager {
+    mutating func randomizePlayers() {
+        // randomize players
         var newArray = [Opponent]()
         for player in opponents {
             if newArray.isEmpty {
@@ -56,24 +82,8 @@ struct PlayerManager {
             }
         }
         opponents = newArray
-    }
 
-    private var currentIndex: Int
-    var currentPlayer: Player {
-        switch currentIndex {
-        case 0..<opponents.count:
-            return opponents[currentIndex]
-        default:
-            return humanPlayer
-        }
-    }
-
-    mutating func endPlayersTurn() {
-        print("Player ends turn with: \(currentPlayer.score)")
-        if currentIndex <= opponents.count {
-            currentIndex += 1
-        } else {
-            currentIndex = 0
-        }
+        // randomize who goes first
+        currentIndex = Int.random(in: 0...opponents.count)
     }
 }

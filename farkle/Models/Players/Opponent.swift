@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Opponent: Player, Identifiable {
+struct Opponent: Player, Identifiable {
     var id: UUID = UUID()
     let name: String
     var score: Int
@@ -34,11 +34,6 @@ class Opponent: Player, Identifiable {
             // If we're not rolling again, take all of the points that you can
             return (scoresThisRoll, false)
         }
-    }
-
-    func endTurn(scoreThisRound: Int) {
-        score += scoreThisRound
-        isCurrentlyRolling = false
     }
 }
 

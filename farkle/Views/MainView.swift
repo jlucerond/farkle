@@ -17,7 +17,7 @@ struct MainView: View {
             HStack {
                 VStack {
                     Spacer()
-                    ForEach(game.playerManager.leftOpponents) { opponent in
+                    ForEach($game.playerManager.leftOpponents) { opponent in
                         OpponentView(opponent: opponent, isOpponentOnLeft: true)
                         Spacer()
                         Spacer()
@@ -34,9 +34,9 @@ struct MainView: View {
                     }
                 }
             }
-            DecisionView(gameManager: $game)
-                .offset(y: 50)
-            PlayerView(player: game.playerManager.humanPlayer)
+//            DecisionView(gameManager: $game)
+//                .offset(y: 50)
+//            PlayerView(player: game.playerManager.humanPlayer)
         }
     }
 }

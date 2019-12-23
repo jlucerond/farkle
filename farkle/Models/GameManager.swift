@@ -6,7 +6,7 @@
 //  Copyright © 2019 Joe Lucero. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 struct GameManager {
     var diceManager: DiceManager = DiceManager()
@@ -16,18 +16,19 @@ struct GameManager {
     private var pointsThisRound = 0
 
     mutating func takeTurn() {
-        let currentPlayer = playerManager.currentPlayer
+        var currentPlayer = playerManager.currentPlayer
 
-        if var human = currentPlayer as? HumanPlayer {
+        if let _ = currentPlayer as? HumanPlayer {
             print("Human player's turn... Skipping")
-            human.isCurrentlyRolling = true
+            currentPlayer.isCurrentlyRolling = true
 
             // TODO: - Logic for how to handle Human
-            endTurnForPlayer(scoresPoints: true)
+            endTurnFor(player: &currentPlayer, pointsScored: 50)
 
-        } else if var computer = currentPlayer as? Opponent {
+
+        } else if let computer = currentPlayer as? Opponent {
             print("\(computer.name)'s turn")
-            computer.isCurrentlyRolling = true
+            currentPlayer.isCurrentlyRolling = true
             diceManager.rollUnselectedDice()
             let unselectedDice = diceManager.unselectedDice
             let scoresFromDice = scoreManager.getAllPossibleScoresFrom(dice: unselectedDice)
@@ -37,9 +38,8 @@ struct GameManager {
             log(opponent: computer, unselectedDice: diceManager.unselectedDice, scores: scoresFromDice, scoresToKeep: decision.scoresToKeep, willRollAgain: decision.willRollAgain)
 
             if scoresFromDice.isEmpty {
-                // No points left
-                print("No points to gain. Next turn.")
-                endTurnFor(opponent: &computer, scoresPoints: false)
+                // No points scored this roll
+                endTurnFor(player: &currentPlayer, pointsScored: 0)
             }
 
             if true {
@@ -48,7 +48,7 @@ struct GameManager {
             }
 
             if !decision.willRollAgain {
-                endTurnFor(opponent: &computer, scoresPoints: true)
+                endTurnFor(player: &currentPlayer, pointsScored: pointsThisRound)
             } else {
                 takeTurn()
             }
@@ -62,18 +62,9 @@ struct GameManager {
         willRollAgain ? print("Roll again!") : print("End turn.")
     }
 
-    mutating func endTurnFor(opponent: inout Opponent, scoresPoints: Bool) {
-        let scoreThisRound = scoresPoints ? pointsThisRound : 0
-        opponent.endTurn(scoreThisRound: scoreThisRound)
+    mutating func endTurnFor(player: inout Player, pointsScored: Int) {
+        player.endTurn(pointsScored: pointsScored)
+        playerManager.updateGame(player: player)
         pointsThisRound = 0
-        playerManager.endPlayersTurn()
     }
-
-    mutating func endTurnForPlayer(scoresPoints: Bool) {
-        playerManager.humanPlayer.score += scoresPoints ? pointsThisRound : 0
-        playerManager.humanPlayer.isCurrentlyRolling = false
-        pointsThisRound = 0
-        playerManager.endPlayersTurn()
-    }
-
 }

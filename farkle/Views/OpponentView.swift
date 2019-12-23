@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct OpponentView: View {
-    @State var opponent: Opponent
+    @Binding var opponent: Opponent
     let isOpponentOnLeft: Bool
     let width: CGFloat = 100
 
@@ -30,8 +30,8 @@ struct OpponentView: View {
 }
 
 struct OpponentView_Previews: PreviewProvider {
+    @State static var joe: Opponent = Opponent(name: "Joe", score: 1500, isCurrentlyRolling: true)
     static var previews: some View {
-        let opponent = Opponent(name: "Joe", score: 1500, isCurrentlyRolling: true)
-        return OpponentView(opponent: opponent, isOpponentOnLeft: true)
+        OpponentView(opponent: OpponentView_Previews.$joe, isOpponentOnLeft: true)
     }
 }

@@ -11,6 +11,14 @@ import Foundation
 protocol Player {
     var isCurrentlyRolling: Bool { get set }
     var score: Int { get set }
+    mutating func endTurn(pointsScored: Int)
+}
+
+extension Player {
+    mutating func endTurn(pointsScored: Int) {
+        self.score += pointsScored
+        self.isCurrentlyRolling = false
+    }
 }
 
 struct HumanPlayer: Player {
