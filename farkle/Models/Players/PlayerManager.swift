@@ -21,13 +21,25 @@ struct PlayerManager {
         randomizePlayers()
     }
 
+    var isHumanPlayersTurn: Bool { currentPlayer as? HumanPlayer != nil }
     private var currentIndex: Int = 0
     var currentPlayer: Player {
-        switch currentIndex {
-        case 0..<opponents.count:
-            return opponents[currentIndex]
-        default:
-            return humanPlayer
+        get {
+            switch currentIndex {
+            case 0..<opponents.count:
+                return opponents[currentIndex]
+            default:
+                return humanPlayer
+            }
+        } set {
+            switch currentIndex {
+            case 0..<opponents.count:
+                guard let opponent = newValue as? Opponent else { return }
+                self.opponents[currentIndex] = opponent
+            default:
+                guard let humanPlayer = newValue as? HumanPlayer else { return }
+                self.humanPlayer = humanPlayer
+            }
         }
     }
 
@@ -52,20 +64,26 @@ struct PlayerManager {
     }
 
     mutating func updateGame(player: Player) {
+        // Update the player above
+        if var humanPlayer = player as? HumanPlayer {
+            humanPlayer.isCurrentlyRolling = false
+            self.humanPlayer = humanPlayer
+        } else if var opponent = player as? Opponent {
+            guard let index = opponents.firstIndex(where: { $0.id == opponent.id }) else { return }
+            opponent.isCurrentlyRolling = false
+            opponents[index] = opponent
+        }
+
+        // Change the current index
         if currentIndex <= opponents.count - 1 {
             currentIndex += 1
         } else {
             currentIndex = 0
         }
-        print("NewIndex is now \(currentIndex)")
-        print("NewPlayer is now \(currentPlayer)")
 
-        if let _ = player as? HumanPlayer {
-            self.humanPlayer.score = player.score
-        } else if let opponent = player as? Opponent {
-            guard var oldOpponent = opponents.first(where: { $0.id == opponent.id }) else { return }
-            oldOpponent.score = player.score
-        }
+        var nextPlayer = currentPlayer
+        nextPlayer.isCurrentlyRolling = true
+        currentPlayer = nextPlayer
     }
 }
 

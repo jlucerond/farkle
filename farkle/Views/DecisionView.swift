@@ -13,16 +13,18 @@ struct DecisionView: View {
     var body: some View {
         HStack {
             Button(action: {
-                self.gameManager.takeTurn()
+                self.gameManager.simulateComputerTurn()
             }) {
-                Text("Have computer Roll")
+                Text("Opponents Turn")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
                     .background(Color.blue)
-                    .cornerRadius(10)
+                    .opacity(gameManager.playerManager.isHumanPlayersTurn ? 0.5 : 1.0)
             }
+            .disabled(gameManager.playerManager.isHumanPlayersTurn)
+
             Button(action: {
                 self.gameManager.diceManager.rollUnselectedDice()
             }) {
@@ -32,8 +34,9 @@ struct DecisionView: View {
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
                     .background(Color.red)
-                    .cornerRadius(10)
+                    .opacity(gameManager.playerManager.isHumanPlayersTurn ? 1.0 : 0.5)
             }
+            .disabled(!gameManager.playerManager.isHumanPlayersTurn)
         }
     }
 }

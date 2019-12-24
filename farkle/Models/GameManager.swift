@@ -15,43 +15,35 @@ struct GameManager {
 
     private var pointsThisRound = 0
 
-    mutating func takeTurn() {
-        var currentPlayer = playerManager.currentPlayer
+    mutating func simulateComputerTurn() {
+        guard  var computer = playerManager.currentPlayer as? Opponent else {
+            assertionFailure("Current Player is not an opponent")
+            return
+        }
 
-        if let _ = currentPlayer as? HumanPlayer {
-            print("Human player's turn... Skipping")
-            currentPlayer.isCurrentlyRolling = true
+        print("\(computer.name)'s turn")
+        diceManager.rollUnselectedDice()
+        let unselectedDice = diceManager.unselectedDice
+        let scoresFromDice = scoreManager.getAllPossibleScoresFrom(dice: unselectedDice)
+        let unusedDice = unselectedDice.count - scoresFromDice.reduce(0) { $0 + $1.diceUsed }
+        let decision = computer.takeTurn(pointsThisRound: pointsThisRound, scoresThisRoll: scoresFromDice, remainingDiceOnTable: unusedDice)
 
-            // TODO: - Logic for how to handle Human
-            endTurnFor(player: &currentPlayer, pointsScored: 50)
+        log(opponent: computer, unselectedDice: diceManager.unselectedDice, scores: scoresFromDice, scoresToKeep: decision.scoresToKeep, willRollAgain: decision.willRollAgain)
 
+        if scoresFromDice.isEmpty {
+            // No points scored this roll
+            endTurnFor(opponent: &computer, pointsScored: 0)
+        }
 
-        } else if let computer = currentPlayer as? Opponent {
-            print("\(computer.name)'s turn")
-            currentPlayer.isCurrentlyRolling = true
-            diceManager.rollUnselectedDice()
-            let unselectedDice = diceManager.unselectedDice
-            let scoresFromDice = scoreManager.getAllPossibleScoresFrom(dice: unselectedDice)
-            let unusedDice = unselectedDice.count - scoresFromDice.reduce(0) { $0 + $1.diceUsed }
-            let decision = computer.takeTurn(pointsThisRound: pointsThisRound, scoresThisRoll: scoresFromDice, remainingDiceOnTable: unusedDice)
+        if true {
+            #warning("I need to remove the selected dice at this point.")
+            pointsThisRound += decision.scoresToKeep.reduce(0) { $0 + $1.points }
+        }
 
-            log(opponent: computer, unselectedDice: diceManager.unselectedDice, scores: scoresFromDice, scoresToKeep: decision.scoresToKeep, willRollAgain: decision.willRollAgain)
-
-            if scoresFromDice.isEmpty {
-                // No points scored this roll
-                endTurnFor(player: &currentPlayer, pointsScored: 0)
-            }
-
-            if true {
-                #warning("I need to remove the selected dice at this point.")
-                pointsThisRound += decision.scoresToKeep.reduce(0) { $0 + $1.points }
-            }
-
-            if !decision.willRollAgain {
-                endTurnFor(player: &currentPlayer, pointsScored: pointsThisRound)
-            } else {
-                takeTurn()
-            }
+        if !decision.willRollAgain {
+            endTurnFor(opponent: &computer, pointsScored: pointsThisRound)
+        } else {
+            simulateComputerTurn()
         }
     }
 
@@ -62,9 +54,9 @@ struct GameManager {
         willRollAgain ? print("Roll again!") : print("End turn.")
     }
 
-    mutating func endTurnFor(player: inout Player, pointsScored: Int) {
-        player.endTurn(pointsScored: pointsScored)
-        playerManager.updateGame(player: player)
+    mutating func endTurnFor(opponent: inout Opponent, pointsScored: Int) {
+        opponent.endTurn(pointsScored: pointsScored)
+        playerManager.updateGame(player: opponent)
         pointsThisRound = 0
     }
 }
