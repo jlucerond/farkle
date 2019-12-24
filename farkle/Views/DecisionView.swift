@@ -26,7 +26,7 @@ struct DecisionView: View {
             .disabled(gameManager.playerManager.isHumanPlayersTurn)
 
             Button(action: {
-                self.gameManager.diceManager.rollUnselectedDice()
+                self.gameManager.playerRollsDice()
             }) {
                 Text("Roll Dice")
                     .font(.title)
