@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PlayerView: View {
-    @State var player: HumanPlayer
+    var player: HumanPlayer
     let width: CGFloat = 200
 
     var body: some View {
