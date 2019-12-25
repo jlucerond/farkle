@@ -38,6 +38,12 @@ struct DiceManager {
         }
     }
 
+    mutating func unselectAllDice() {
+        for index in (0..<dice.count) {
+            dice[index].isSelected = false
+        }
+    }
+
     private func getRandomDice() -> Dice {
         let randomNumber = Int.random(in: 1...6)
         return Dice(value: randomNumber)

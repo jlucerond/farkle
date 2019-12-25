@@ -54,15 +54,22 @@ struct GameManager {
         }
 
         #warning("this is temporary")
-        diceManager.rollAllDice()
+        diceManager.rollUnselectedDice()
         
         let unselectedDice = diceManager.unselectedDice
         let scoresFromDice = scoreManager.getAllPossibleScoresFrom(dice: unselectedDice)
 
         let pointsFromDice = scoresFromDice.reduce(0) { $0 + $1.points }
-        endTurnFor(&human, pointsScored: pointsFromDice)
 
-        log(player: human, unselectedDice: unselectedDice, scores: scoresFromDice, scoresToKeep: scoresFromDice, willRollAgain: false)
+        let willRollAgain = unselectedDice.count <= 1
+        if willRollAgain {
+            endTurnFor(&human, pointsScored: pointsFromDice)
+            diceManager.unselectAllDice()
+        } else {
+            // TODO: -
+        }
+
+        log(player: human, unselectedDice: unselectedDice, scores: scoresFromDice, scoresToKeep: scoresFromDice, willRollAgain: willRollAgain)
     }
 
     private func log(player: Player, unselectedDice: [Dice], scores: [Score], scoresToKeep: [Score], willRollAgain: Bool) {
