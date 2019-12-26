@@ -21,7 +21,6 @@ struct GameManager {
             return
         }
 
-        print("\(computer.name)'s turn")
         diceManager.rollUnselectedDice()
         let unselectedDice = diceManager.unselectedDice
         let scoresFromDice = scoreManager.getAllPossibleScoresFrom(dice: unselectedDice)
@@ -33,6 +32,7 @@ struct GameManager {
         if scoresFromDice.isEmpty {
             // No points scored this roll
             endTurnFor(&computer, pointsScored: 0)
+            return
         }
 
         if true {
@@ -61,8 +61,8 @@ struct GameManager {
 
         let pointsFromDice = scoresFromDice.reduce(0) { $0 + $1.points }
 
-        let willRollAgain = unselectedDice.count <= 1
-        if willRollAgain {
+        let willRollAgain = unselectedDice.count >= 1
+        if !willRollAgain {
             endTurnFor(&human, pointsScored: pointsFromDice)
             diceManager.unselectAllDice()
         } else {
@@ -70,6 +70,18 @@ struct GameManager {
         }
 
         log(player: human, unselectedDice: unselectedDice, scores: scoresFromDice, scoresToKeep: scoresFromDice, willRollAgain: willRollAgain)
+    }
+
+    private mutating func endTurnFor(_ opponent: inout Opponent, pointsScored: Int) {
+        opponent.endTurn(pointsScored: pointsScored)
+        playerManager.endTurnFor(opponent)
+        pointsThisRound = 0
+    }
+
+    private mutating func endTurnFor(_ human: inout HumanPlayer, pointsScored: Int) {
+        human.endTurn(pointsScored: pointsScored)
+        playerManager.endTurnFor(human)
+        pointsThisRound = 0
     }
 
     private func log(player: Player, unselectedDice: [Dice], scores: [Score], scoresToKeep: [Score], willRollAgain: Bool) {
@@ -81,17 +93,5 @@ struct GameManager {
         print("They have \(scores)")
         print("They are keeping \(scoresToKeep)")
         willRollAgain ? print("Roll again!") : print("End turn.")
-    }
-
-    private mutating func endTurnFor(_ opponent: inout Opponent, pointsScored: Int) {
-        opponent.endTurn(pointsScored: pointsScored)
-        playerManager.updateGame(player: opponent)
-        pointsThisRound = 0
-    }
-
-    private mutating func endTurnFor(_ human: inout HumanPlayer, pointsScored: Int) {
-        human.endTurn(pointsScored: pointsScored)
-        playerManager.updateGame(player: human)
-        pointsThisRound = 0
     }
 }

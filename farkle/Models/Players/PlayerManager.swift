@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct PlayerManager {
-    var humanPlayer: HumanPlayer = HumanPlayer(score: 0)
-    var opponents: [Opponent] = [
+    private(set) var humanPlayer: HumanPlayer = HumanPlayer(score: 0)
+    private(set) var opponents: [Opponent] = [
         Opponent(name: "Dad", score: 0),
         Opponent(name: "Joe", score: 0),
         Opponent(name: "Dominic", score: 0),
@@ -23,7 +23,7 @@ struct PlayerManager {
 
     var isHumanPlayersTurn: Bool { currentPlayer as? HumanPlayer != nil }
     private var currentIndex: Int = 0
-    var currentPlayer: Player {
+    private(set) var currentPlayer: Player {
         get {
             switch currentIndex {
             case 0..<opponents.count:
@@ -63,27 +63,13 @@ struct PlayerManager {
         return rightOpponents
     }
 
-    mutating func updateGame(player: Player) {
+    mutating func endTurnFor(_ player: Player) {
         // Update the player above
-        if var humanPlayer = player as? HumanPlayer {
-            humanPlayer.isCurrentlyRolling = false
-            self.humanPlayer = humanPlayer
-        } else if var opponent = player as? Opponent {
-            guard let index = opponents.firstIndex(where: { $0.id == opponent.id }) else { return }
-            opponent.isCurrentlyRolling = false
-            opponents[index] = opponent
-        }
+        var player = player
+        player.isCurrentlyRolling = false
+        save(player: player)
 
-        // Change the current index
-        if currentIndex <= opponents.count - 1 {
-            currentIndex += 1
-        } else {
-            currentIndex = 0
-        }
-
-        var nextPlayer = currentPlayer
-        nextPlayer.isCurrentlyRolling = true
-        currentPlayer = nextPlayer
+        startTurnForNextPlayer()
     }
 }
 
@@ -103,5 +89,27 @@ private extension PlayerManager {
 
         // randomize who goes first
         currentIndex = Int.random(in: 0...opponents.count)
+    }
+
+    mutating func startTurnForNextPlayer() {
+        // Change the current index
+        if currentIndex <= opponents.count - 1 {
+            currentIndex += 1
+        } else {
+            currentIndex = 0
+        }
+
+        var nextPlayer = currentPlayer
+        print("next player is \(nextPlayer)")
+        nextPlayer.isCurrentlyRolling = true
+        save(player: nextPlayer)
+    }
+
+    mutating func save(player: Player) {
+        if let player = player as? Opponent, let index = opponents.firstIndex(where: { $0.id == player.id }) {
+            opponents[index] = player
+        } else if let human = player as? HumanPlayer {
+            self.humanPlayer = human
+        }
     }
 }
