@@ -9,6 +9,9 @@
 import Foundation
 
 struct ScoreManager {
+    /// this gives a dictionary where key is 1 thorugh 6 and value is how many of each we have.
+    typealias DiceDictionary = [Int: Int]
+
     func getAllPossibleScoresFrom(dice: [Dice]) -> [Score] {
         var scores = [Score]()
         let diceDictionary = putIntoDictionary(dice: dice)
@@ -32,16 +35,12 @@ struct ScoreManager {
         if !scores.isEmpty { return scores }
 
         // Now we need to check for all other possibilities watching for overlap
-        if hasFiveOfAKind(diceDictionary: diceDictionary) {
-            scores.append(Score(kind: .fiveOfAKind))
-        } else if hasFourOfAKindPlusPair(diceDictionary: diceDictionary) {
-            scores.append(Score(kind: .fourOfAKind))
-        } else if hasThreeOfAKind(diceDictionary: diceDictionary) {
-            if let value = diceDictionary.first(where: { $1 == 3 }) {
-                scores.append(Score(kind: .threeOfAKind(diceValue: value.key)))
-            } else {
-                assertionFailure("Something went wrong here")
-            }
+        if let diceValue = hasFiveOfAKind(diceDictionary: diceDictionary) {
+            scores.append(Score(kind: .fiveOfAKind(diceValue: diceValue)))
+        } else if let diceValue = hasFourOfAKind(diceDictionary: diceDictionary) {
+            scores.append(Score(kind: .fourOfAKind(diceValue: diceValue)))
+        } else if let diceValue = hasThreeOfAKind(diceDictionary: diceDictionary) {
+            scores.append(Score(kind: .threeOfAKind(diceValue: diceValue)))
         }
 
         // Then see if we have leftover (wasn't used above) fives or ones
@@ -57,16 +56,43 @@ struct ScoreManager {
 
         return scores
     }
+
+    /// This method does not guarantee reference semantics
+    func getDiceNeedFor(scores: [Score], from allDice: [Dice]) -> [Dice] {
+        var diceUsed = [Dice]()
+        for score in scores {
+            switch score.kind {
+            case .twoTriples, .threePairs, .sixStraight, .sixOfAKind, .fourOfAKindPlusPair:
+                guard allDice.count == 6 else {
+                    assertionFailure("Dice and scores don't match")
+                    return []
+                }
+                return allDice
+            case .fiveOfAKind(diceValue: let value):
+                diceUsed.append(contentsOf: allDice.filter {$0.value == value})
+            case .fourOfAKind(diceValue: let value):
+                diceUsed.append(contentsOf: allDice.filter {$0.value == value})
+            case .threeOfAKind(diceValue: let value):
+                diceUsed.append(contentsOf: allDice.filter {$0.value == value})
+            case .five:
+                diceUsed.append(Dice(value: 5))
+            case .one:
+                diceUsed.append(Dice(value: 1))
+            }
+        }
+        return diceUsed
+    }
 }
 
 private extension ScoreManager {
-    /// this gives a dictionary where key is 1 thorugh 6 and value is how many of each we have.
-    typealias DiceDictionary = [Int: Int]
     func putIntoDictionary(dice: [Dice]) -> DiceDictionary {
         var diceDictionary = [Int: Int]()
         for singleDice in dice {
             let valueOnDice = singleDice.value
-            guard valueOnDice <= 6, valueOnDice > 0 else { assertionFailure("Your dice's value is wrong"); continue }
+            guard valueOnDice <= 6, valueOnDice > 0 else {
+                assertionFailure("Your dice's value is wrong")
+                continue
+            }
 
             if let numberOfDiceAlreadyCounted = diceDictionary[valueOnDice] {
                 diceDictionary[valueOnDice] = numberOfDiceAlreadyCounted + 1
@@ -118,25 +144,25 @@ private extension ScoreManager {
         return true
     }
 
-    private func hasFiveOfAKind(diceDictionary: DiceDictionary) -> Bool {
-        for (_, value) in diceDictionary {
-            if value == 5 { return true }
+    private func hasFiveOfAKind(diceDictionary: DiceDictionary) -> Int? {
+        for (diceValue, numberOfDice) in diceDictionary {
+            if numberOfDice == 5 { return diceValue }
         }
-        return false
+        return nil
     }
 
-    private func hasFourOfAKind(diceDictionary: DiceDictionary) -> Bool {
-        for (_, value) in diceDictionary {
-            if value == 4 { return true }
+    private func hasFourOfAKind(diceDictionary: DiceDictionary) -> Int? {
+        for (diceValue, numberOfDice) in diceDictionary {
+            if numberOfDice == 4 { return diceValue }
         }
-        return false
+        return nil
     }
 
-    private func hasThreeOfAKind(diceDictionary: DiceDictionary) -> Bool {
-        for (_, value) in diceDictionary {
-            if value == 3 { return true }
+    private func hasThreeOfAKind(diceDictionary: DiceDictionary) -> Int? {
+        for (diceValue, numberOfDice) in diceDictionary {
+            if numberOfDice == 3 { return diceValue }
         }
-        return false
+        return nil
     }
 
     private func remainingFives(diceDictionary: DiceDictionary) -> Int {

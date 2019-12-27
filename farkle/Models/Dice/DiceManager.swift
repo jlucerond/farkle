@@ -23,13 +23,6 @@ struct DiceManager {
         ]
     }
 
-    mutating func rollAllDice() {
-        dice = []
-        for _ in 1...6 {
-            dice.append(getRandomDice())
-        }
-    }
-
     mutating func rollUnselectedDice() {
         for (index, oneDice) in dice.enumerated() {
             if !oneDice.isSelected {
@@ -41,6 +34,26 @@ struct DiceManager {
     mutating func unselectAllDice() {
         for index in (0..<dice.count) {
             dice[index].isSelected = false
+        }
+    }
+
+    mutating func select(dice diceToSelect: [Dice]) {
+        topLoop: for oneDiceToSelect in diceToSelect {
+            innerLoop: for (index, oneDice) in self.dice.enumerated() {
+                if !oneDice.isSelected && oneDice.value == oneDiceToSelect.value {
+                    self.dice[index].isSelected = true
+                    continue topLoop
+                }
+            }
+            #warning("Take this out and replace with an assertionFailure")
+            print("We tried and failed to remove a 1")
+        }
+    }
+
+    mutating func resetDiceIfAllDiceHaveBeenUsed() {
+        if unselectedDice.count == 0 {
+            print("ALL DICE WERE USED!!!!")
+            unselectAllDice()
         }
     }
 

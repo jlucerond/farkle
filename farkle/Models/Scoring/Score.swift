@@ -52,11 +52,11 @@ struct Score {
 
 enum ScoringCombination {
     case twoTriples
-    case fourOfAKind
+    case fourOfAKind(diceValue: Int)
     case threePairs
     case sixStraight
     case sixOfAKind
-    case fiveOfAKind
+    case fiveOfAKind(diceValue: Int)
     case fourOfAKindPlusPair
     case threeOfAKind(diceValue: Int)
     case five

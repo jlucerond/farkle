@@ -10,11 +10,12 @@ import Foundation
 
 struct RiskStrategyManager {
     static func random() -> RiskStrategy {
-        let maxDice = Int.random(in: 1...4)
+        /// For example, if the number is 2, they will be ok keeping their score if they have scored with just 2 dice and not scored with 4 on the table
+        let preferredNumberOfDiceToHold = Int.random(in: 2...5)
         let scoresToKeep = RiskStrategyManager.randomScoresToKeep()
         let stoppingScoreForRound = RiskStrategyManager.randomMinimumStoppingScoreForRound()
 
-        return RiskStrategy(maxDice: maxDice, scoresToKeep: scoresToKeep, minStopScore: stoppingScoreForRound)
+        return RiskStrategy(preferredNumberOfDiceToHold: preferredNumberOfDiceToHold, scoresToKeep: scoresToKeep, minStopScore: stoppingScoreForRound)
     }
 }
 

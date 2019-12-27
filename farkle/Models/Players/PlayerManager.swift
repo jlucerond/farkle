@@ -19,6 +19,9 @@ struct PlayerManager {
 
     init() {
         randomizePlayers()
+        var firstPlayer = currentPlayer
+        firstPlayer.isCurrentlyRolling = true
+        self.save(player: firstPlayer)
     }
 
     var isHumanPlayersTurn: Bool { currentPlayer as? HumanPlayer != nil }

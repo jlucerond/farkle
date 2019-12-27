@@ -9,14 +9,14 @@
 import Foundation
 
 struct RiskStrategy {
-    let maxDiceRemainingAllowed: Int
+    let preferredNumberOfDiceToHold: Int
     let scoresToKeep: ScoresToKeep
     let minimumStoppingScoreForRound: Int
     /// This should be a number from 1 to 99. Used for the function willUserRollAgainOnCloseCall. Higher number means player is more likely to go for it.
     private let randomPercentageToGoForIt: Int
 
-    init(maxDice: Int, scoresToKeep: ScoresToKeep, minStopScore: Int) {
-        self.maxDiceRemainingAllowed = maxDice
+    init(preferredNumberOfDiceToHold: Int, scoresToKeep: ScoresToKeep, minStopScore: Int) {
+        self.preferredNumberOfDiceToHold = preferredNumberOfDiceToHold
         self.scoresToKeep = scoresToKeep
         self.minimumStoppingScoreForRound = minStopScore
         self.randomPercentageToGoForIt = Int.random(in: 1...99)

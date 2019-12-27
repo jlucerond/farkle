@@ -60,11 +60,15 @@ private extension Opponent {
 
     func shouldRollAgain(pointsThisRound: Int, remainingDiceOnTable: Int) -> Bool {
         // Must have 500 points before you can stop
-        #warning("put this back in eventually")
-//        guard pointsThisRound + score >= 500 else { return true }
+        guard pointsThisRound + score >= 500 else { return true }
+
+        // Leaving this here in case I want to add another variable. Maybe stopping above 5000?
+        if remainingDiceOnTable == 0 {
+            return true
+        }
 
         let hasEnoughPointsToStop = pointsThisRound > riskStrategy.minimumStoppingScoreForRound
-        let hasEnoughDiceToRollAgain = remainingDiceOnTable > riskStrategy.maxDiceRemainingAllowed
+        let hasEnoughDiceToRollAgain = remainingDiceOnTable < riskStrategy.preferredNumberOfDiceToHold
 
         switch (hasEnoughPointsToStop, hasEnoughDiceToRollAgain) {
         case (true, true):
