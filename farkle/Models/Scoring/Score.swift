@@ -27,7 +27,11 @@ struct Score {
         case .fourOfAKindPlusPair:
             return 1500
         case .threeOfAKind(let value):
-            return value * 100
+            if value == 1 {
+                return 300
+            } else {
+                return value * 100
+            }
         case .five:
             return 50
         case .one:

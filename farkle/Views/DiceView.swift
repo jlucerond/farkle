@@ -23,12 +23,13 @@ struct DiceView: View {
                     Rectangle()
                         .foregroundColor(.gray)
                         .scaledToFit()
-                        .cornerRadius(geo.frame(in: .local).width / 10)
+                        .cornerRadius(geo.frame(in: .local).width / 12)
                         .opacity(0.8)
                 }
             }
         }
         .onTapGesture {
+            #warning("Next fix is figuring out whether user should be able to tap")
             self.dice.isSelected = !self.dice.isSelected
         }
     }

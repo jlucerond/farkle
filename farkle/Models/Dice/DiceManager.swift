@@ -45,8 +45,7 @@ struct DiceManager {
                     continue topLoop
                 }
             }
-            #warning("Take this out and replace with an assertionFailure")
-            print("We tried and failed to remove a 1")
+            assertionFailure("Tried to remove a dice that was not in the unselected dice array.")
         }
     }
 
