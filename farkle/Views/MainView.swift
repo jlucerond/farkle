@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var game: GameManager = GameManager()
+    private var isPlayersTurn: Bool { game.playerManager.isHumanPlayersTurn }
 
     var body: some View {
         VStack {
@@ -24,7 +25,7 @@ struct MainView: View {
                     }
                 }
 
-                DiceRollingAreaView(dice: $game.diceManager.dice)
+                DiceRollingAreaView(dice: $game.diceManager.dice, isPlayersTurn: self.isPlayersTurn)
                 VStack {
                     Spacer()
                     ForEach(game.playerManager.rightOpponents) { opponent in

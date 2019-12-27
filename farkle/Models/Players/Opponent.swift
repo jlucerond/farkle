@@ -68,7 +68,7 @@ private extension Opponent {
         }
 
         let hasEnoughPointsToStop = pointsThisRound > riskStrategy.minimumStoppingScoreForRound
-        let hasEnoughDiceToRollAgain = remainingDiceOnTable < riskStrategy.preferredNumberOfDiceToHold
+        let hasEnoughDiceToRollAgain = remainingDiceOnTable > (6 - riskStrategy.preferredNumberOfDiceToHold)
 
         switch (hasEnoughPointsToStop, hasEnoughDiceToRollAgain) {
         case (true, true):

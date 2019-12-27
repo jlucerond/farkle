@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DiceView: View {
     @Binding var dice: Dice
+    var isPlayersTurn: Bool
 
     var body: some View {
         ZStack {
@@ -29,6 +30,7 @@ struct DiceView: View {
             }
         }
         .onTapGesture {
+            guard self.isPlayersTurn else { return }
             #warning("Next fix is figuring out whether user should be able to tap")
             self.dice.isSelected = !self.dice.isSelected
         }
@@ -40,9 +42,9 @@ struct DiceView_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack {
-            DiceView(dice: DiceView_Previews.$diceManager.dice[0])
-            DiceView(dice: DiceView_Previews.$diceManager.dice[1])
-            DiceView(dice: DiceView_Previews.$diceManager.dice[2])
+            DiceView(dice: DiceView_Previews.$diceManager.dice[0], isPlayersTurn: false)
+            DiceView(dice: DiceView_Previews.$diceManager.dice[1], isPlayersTurn: true)
+            DiceView(dice: DiceView_Previews.$diceManager.dice[2], isPlayersTurn: false)
         }
     }
 }
