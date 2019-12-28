@@ -70,6 +70,8 @@ private extension Opponent {
         let hasEnoughPointsToStop = pointsThisRound > riskStrategy.minimumStoppingScoreForRound
         let hasEnoughDiceToRollAgain = remainingDiceOnTable > (6 - riskStrategy.preferredNumberOfDiceToHold)
 
+        print("What should I do with \(pointsThisRound) points and \(remainingDiceOnTable) dice left?")
+
         switch (hasEnoughPointsToStop, hasEnoughDiceToRollAgain) {
         case (true, true):
             return riskStrategy.willUserRollAgainOnCloseCall()

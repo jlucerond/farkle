@@ -63,7 +63,6 @@ struct GameManager {
         #warning("this is temporary")
         diceManager.rollUnselectedDice()
 
-        endTurnFor(&human, pointsScored: 321)
 
 //        let unselectedDice = diceManager.unselectedDice
 //        let scoresFromDice = scoreManager.getAllPossibleScoresFrom(dice: unselectedDice)
@@ -79,6 +78,15 @@ struct GameManager {
 //        }
 
 //        log(player: human, unselectedDice: unselectedDice, scores: scoresFromDice, scoresToKeep: scoresFromDice, willRollAgain: willRollAgain)
+    }
+
+    mutating func playerEndsTurn() {
+        guard var human = playerManager.currentPlayer as? HumanPlayer else {
+            assertionFailure("Human is not up!")
+            return
+        }
+
+        endTurnFor(&human, pointsScored: pointsThisRound)
     }
 
     private mutating func endTurnFor(_ opponent: inout Opponent, pointsScored: Int) {

@@ -56,12 +56,12 @@ struct Score {
 
 enum ScoringCombination {
     case twoTriples
-    case fourOfAKind(diceValue: Int)
     case threePairs
     case sixStraight
     case sixOfAKind
-    case fiveOfAKind(diceValue: Int)
     case fourOfAKindPlusPair
+    case fiveOfAKind(diceValue: Int)
+    case fourOfAKind(diceValue: Int)
     case threeOfAKind(diceValue: Int)
     case five
     case one
@@ -69,6 +69,6 @@ enum ScoringCombination {
 
 extension Score: CustomDebugStringConvertible {
     var debugDescription: String {
-        return "Score of kind:\(kind). Score: \(points)"
+        return "Score \(kind) worth \(points)"
     }
 }

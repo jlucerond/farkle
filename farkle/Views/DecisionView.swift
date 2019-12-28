@@ -11,7 +11,7 @@ import SwiftUI
 struct DecisionView: View {
     @Binding var gameManager: GameManager
     var body: some View {
-        HStack {
+        VStack {
             Button(action: {
                 self.gameManager.simulateComputerTurn()
             }) {
@@ -28,7 +28,7 @@ struct DecisionView: View {
             Button(action: {
                 self.gameManager.playerRollsDice()
             }) {
-                Text("Roll Dice")
+                Text("Roll Again")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -37,6 +37,20 @@ struct DecisionView: View {
                     .opacity(gameManager.playerManager.isHumanPlayersTurn ? 1.0 : 0.5)
             }
             .disabled(!gameManager.playerManager.isHumanPlayersTurn)
+
+            Button(action: {
+                self.gameManager.playerRollsDice()
+            }) {
+                Text("End Turn")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.white)
+                    .multilineTextAlignment(.center)
+                    .background(Color.red)
+                    .opacity(gameManager.playerManager.isHumanPlayersTurn ? 1.0 : 0.5)
+            }
+            .disabled(!gameManager.playerManager.isHumanPlayersTurn)
+
         }
     }
 }
