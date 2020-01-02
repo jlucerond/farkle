@@ -34,12 +34,12 @@ struct DecisionView: View {
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
                     .background(Color.red)
-                    .opacity(gameManager.playerManager.isHumanPlayersTurn ? 1.0 : 0.5)
+                    .opacity(gameManager.playerManager.isHumanPlayersTurn && gameManager.humanHasTakenValidTurn ? 1.0 : 0.5)
             }
-            .disabled(!gameManager.playerManager.isHumanPlayersTurn)
+            .disabled(!gameManager.playerManager.isHumanPlayersTurn || !gameManager.humanHasTakenValidTurn)
 
             Button(action: {
-                self.gameManager.playerRollsDice()
+                self.gameManager.playerEndsTurn()
             }) {
                 Text("End Turn")
                     .font(.title)

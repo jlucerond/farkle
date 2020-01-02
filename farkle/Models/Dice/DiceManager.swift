@@ -10,8 +10,9 @@ import Foundation
 
 struct DiceManager {
     var dice: [Dice]
-    var unselectedDice: [Dice] { dice.filter { !$0.isSelected }}
-
+    var unselectedDice: [Dice] { dice.filter { $0.selected == .unselected }}
+    var diceSelectedThisTurn: [Dice] { dice.filter { $0.selected == .selectedThisRoll }}
+    
     init() {
         dice = [
             Dice(value: 1),
@@ -25,7 +26,7 @@ struct DiceManager {
 
     mutating func rollUnselectedDice() {
         for (index, oneDice) in dice.enumerated() {
-            if !oneDice.isSelected {
+            if oneDice.selected == .unselected {
                 dice[index] = getRandomDice()
             }
         }
@@ -33,15 +34,15 @@ struct DiceManager {
 
     mutating func unselectAllDice() {
         for index in (0..<dice.count) {
-            dice[index].isSelected = false
+            dice[index].selected = .unselected
         }
     }
 
-    mutating func select(dice diceToSelect: [Dice]) {
+    mutating func markAsUsedInPreviousRoll(dice diceToSelect: [Dice]) {
         topLoop: for oneDiceToSelect in diceToSelect {
             innerLoop: for (index, oneDice) in self.dice.enumerated() {
-                if !oneDice.isSelected && oneDice.value == oneDiceToSelect.value {
-                    self.dice[index].isSelected = true
+                if oneDice.selected != .selectedInPreviousRoll && oneDice.value == oneDiceToSelect.value {
+                    self.dice[index].selected = .selectedInPreviousRoll
                     continue topLoop
                 }
             }

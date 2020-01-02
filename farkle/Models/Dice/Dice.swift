@@ -11,10 +11,18 @@ import SwiftUI
 struct Dice: Identifiable {
     var id: UUID = UUID()
 
+    /// 1-6
     let value: Int
-    var isSelected: Bool = false
+    /// Used to determine whether the human player has selected the dice this turn
+    var selected: State = .unselected
     var image: Image {
         return Image("\(value)")
+    }
+
+    enum State {
+        case unselected
+        case selectedThisRoll
+        case selectedInPreviousRoll
     }
 }
 

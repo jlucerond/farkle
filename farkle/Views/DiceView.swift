@@ -19,7 +19,7 @@ struct DiceView: View {
             .scaledToFit()
                 .shadow(color: .gray, radius: 3, x: 2, y: 2)
 
-            if dice.isSelected {
+            if dice.selected != .unselected {
                 GeometryReader { geo in
                     Rectangle()
                         .foregroundColor(.gray)
@@ -31,8 +31,13 @@ struct DiceView: View {
         }
         .onTapGesture {
             guard self.isPlayersTurn else { return }
+            guard self.dice.selected != .selectedInPreviousRoll else { return }
             #warning("Next fix is figuring out whether user should be able to tap")
-            self.dice.isSelected = !self.dice.isSelected
+            if self.dice.selected == .selectedThisRoll {
+                self.dice.selected = .unselected
+            } else {
+                self.dice.selected = .selectedThisRoll
+            }
         }
     }
 }
