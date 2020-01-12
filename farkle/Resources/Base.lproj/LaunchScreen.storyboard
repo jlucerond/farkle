@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +12,51 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDg-6i-XQt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MP" translatesAutoresizingMaskIntoConstraints="NO" id="jgc-Lw-HXT">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="jgc-Lw-HXT" firstAttribute="leading" secondItem="kDg-6i-XQt" secondAttribute="leading" id="L6S-d3-zV4"/>
+                                    <constraint firstItem="jgc-Lw-HXT" firstAttribute="top" secondItem="kDg-6i-XQt" secondAttribute="top" id="Pdj-ME-DxM"/>
+                                    <constraint firstAttribute="bottom" secondItem="jgc-Lw-HXT" secondAttribute="bottom" id="aSZ-mp-e3L"/>
+                                    <constraint firstAttribute="trailing" secondItem="jgc-Lw-HXT" secondAttribute="trailing" id="nhS-fU-1wO"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="68E-7u-38i">
+                                <rect key="frame" x="98.5" y="370" width="217.5" height="156"/>
+                                <string key="text">Alaskan
+Farkle</string>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="60"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="kDg-6i-XQt" secondAttribute="bottom" id="FrC-zL-QlZ"/>
+                            <constraint firstItem="kDg-6i-XQt" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Ozv-dB-Bo8"/>
+                            <constraint firstItem="kDg-6i-XQt" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="QCP-w4-VgD"/>
+                            <constraint firstItem="68E-7u-38i" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="R3A-i4-wTV"/>
+                            <constraint firstItem="68E-7u-38i" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RzY-0e-n7k"/>
+                            <constraint firstAttribute="trailing" secondItem="kDg-6i-XQt" secondAttribute="trailing" id="hGt-Sp-ybl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MP" width="500" height="500"/>
+    </resources>
 </document>
